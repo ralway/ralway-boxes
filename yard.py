@@ -23,9 +23,10 @@ class LeverFrame(tk.Frame):
 
 
 class Lever(object):
-    def __init__(self, master, text, colour, column, locking={}):
+    def __init__(self, master, text, colour, column, locking={}, cmd=None):
         self.master = master
         self.locking = locking
+        self.cmd = cmd
 
         self.state = tk.BooleanVar()
         self.state.set(True)
@@ -52,6 +53,8 @@ class Lever(object):
                 return
 
         self.state.set(not self.state.get())
+        if self.cmd is not None:
+            self.cmd()
 
 
 if __name__ == '__main__':
